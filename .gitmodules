@@ -1,0 +1,3 @@
+[submodule "packages/root_utils"]
+	path = packages/root_utils
+    url = https://github.com/vitalfocheux/root_utils.git
