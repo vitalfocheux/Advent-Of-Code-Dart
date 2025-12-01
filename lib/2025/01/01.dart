@@ -33,8 +33,7 @@ dynamic part2(String input) {
   List<String> rotations = input.split('\n');
   for (final rot in rotations) {
     final int value = rot.findInt();
-    final int clicks = value ~/ 100;    // quotient entier
-    final int rotation = value % 100;   // reste
+    var (clicks, rotation) = divmod(value, 100);
 
     turns += clicks;
 
