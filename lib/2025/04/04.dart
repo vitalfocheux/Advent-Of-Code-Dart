@@ -8,11 +8,52 @@ void main() async {
 }
 
 dynamic part1(String input) {
-  // TODO: implémenter la solution de la partie 1
-  return null;
+  var res = 0;
+  Matrix2<String> matrix = Matrix2.fromString(input, '\n', '');
+  matrix.iterate((value, vector) {
+      if(value != '@'){
+        return;
+      }
+      int adjacentCount = 0;
+      matrix.iterateAround8(vector, (v, vec) {
+        if(v == '@'){
+          adjacentCount++;
+        }
+      });
+      if(adjacentCount < 4){
+        res++;
+      }
+    });
+  return res;
 }
 
 dynamic part2(String input) {
-  // TODO: implémenter la solution de la partie 2
-  return null;
+  var res = 0;
+  List<(int, int)> toRemove = [];
+  Matrix2<String> matrix = Matrix2.fromString(input, '\n', '');
+  while(true){
+    matrix.iterate((value, vector) {
+      if(value != '@'){
+        return;
+      }
+      int adjacentCount = 0;
+      matrix.iterateAround8(vector, (v, vec) {
+        if(v == '@'){
+          adjacentCount++;
+        }
+      });
+      if(adjacentCount < 4){
+        toRemove.add(vector);
+      }
+    });
+    if(toRemove.isEmpty){
+      break;
+    }
+    for((int, int) v in toRemove){
+      matrix[v] = '.';
+    }
+    res += toRemove.length;
+    toRemove.clear();
+  }
+  return res;
 }
